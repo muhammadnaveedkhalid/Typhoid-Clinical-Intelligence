@@ -32,6 +32,9 @@ class DiagnosisResponse(BaseModel):
     recommendation: List[str]
     explanation: List[str]
     rule_trace: List[RuleTrace]
+    ml_probability: Optional[float] = Field(default=None, ge=0, le=1)
+    hybrid_score: Optional[float] = Field(default=None, ge=0, le=1)
+    model_status: Optional[str] = None
     guideline_snippets: Optional[List[str]] = None
 
 
@@ -45,3 +48,12 @@ class DatasetResponse(BaseModel):
     dataset_id: str
     total_rows: int
     rows: List[DatasetRow]
+
+
+class ModelTrainResponse(BaseModel):
+    trained: bool
+    rows_used: int
+    features_used: List[str]
+    target_column: str
+    model_path: str
+    message: str

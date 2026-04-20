@@ -67,6 +67,49 @@ npm run dev
 - `GET /health` -> service health
 - `POST /api/diagnose` -> explainable typhoid risk diagnosis
 - `GET /api/dataset` -> real-time dataset preview from Hugging Face
+- `POST /api/train-model` -> train ML model from CSV (default: `backend/data/patient_data.csv`)
+
+## CSV-Based ML Training (Patient Data)
+
+Now the system supports your requested workflow:
+- Keep patient records in a CSV/Excel-exported CSV file
+- Train a Python model from that CSV
+- Use the trained model for every diagnosis request
+
+Default CSV path:
+- `backend/data/patient_data.csv`
+
+Required columns:
+- `high_fever`
+- `abdominal_pain`
+- `weakness_fatigue`
+- `headache`
+- `loss_of_appetite`
+- `nausea_vomiting`
+- `diarrhea_constipation`
+- `persistent_fever_over_101f`
+- `gi_discomfort`
+- `low_platelet_count`
+- `positive_widal_or_blood_culture`
+- `contaminated_food_water_exposure`
+- `typhoid_label` (target: `0` or `1`)
+
+Train model:
+```bash
+curl -X POST "http://127.0.0.1:8000/api/train-model"
+```
+
+Train model from custom CSV path:
+```bash
+curl -X POST "http://127.0.0.1:8000/api/train-model?csv_path=data/my_patient_data.csv"
+```
+
+After training:
+- `/api/diagnose` returns:
+  - rule-based score
+  - `ml_probability`
+  - `hybrid_score`
+  - model load status
 
 ## Important Note
 
