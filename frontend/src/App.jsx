@@ -39,7 +39,7 @@ export default function App() {
   const [dataset, setDataset] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [view, setView] = useState("home");
+  const [view, setView] = useState("screening");
   const selectedSymptoms = Object.values(form).filter(Boolean).length;
 
   useEffect(() => {
@@ -85,178 +85,170 @@ export default function App() {
         ? "Further testing advised for confirmation."
         : "Current indicators suggest lower immediate risk.";
 
+  const activeTab = (tab) => (view === tab ? "nav-btn active" : "nav-btn");
+
   return (
     <main className="app-shell">
-      <div className="noise-layer" />
-      <section className="container">
-        <nav className="top-nav glass">
-          <div className="brand">
-            <p className="brand-title">Typhoid Clinical Intelligence</p>
-            <p className="brand-subtitle">Explainable Hybrid Decision Support</p>
+      <div className="background-overlay" />
+      <section className="container-fluid">
+        <header className="top-nav">
+          <div>
+            <p className="brand-title">Typhoid Clinical Intelligence Platform</p>
+            <p className="brand-subtitle">Explainable Hybrid Knowledge-Based Decision Support</p>
           </div>
           <div className="nav-actions">
-            <button className={view === "screening" ? "nav-btn active" : "nav-btn"} onClick={() => setView("screening")}>
+            <button className={activeTab("screening")} onClick={() => setView("screening")}>
               Screening
             </button>
-            <button className={view === "symptoms" ? "nav-btn active" : "nav-btn"} onClick={() => setView("symptoms")}>
+            <button className={activeTab("symptoms")} onClick={() => setView("symptoms")}>
               Symptoms
             </button>
-            <button className={view === "diet" ? "nav-btn active" : "nav-btn"} onClick={() => setView("diet")}>
+            <button className={activeTab("diet")} onClick={() => setView("diet")}>
               Diet
             </button>
           </div>
-        </nav>
-
-        <header className="hero glass premium-hero">
-          <div className="hero-topline">Infectious Disease Decision Support</div>
-          <div className="hero-main">
-            <div>
-              <div className="hero-badge">Explainable Hybrid Engine</div>
-              <h1>
-                Typhoid <span>Clinical Intelligence</span>
-              </h1>
-              <p>
-                A modern knowledge-based diagnostic interface combining IF-THEN reasoning, guideline evidence, and
-                transparent rule-level explanations.
-              </p>
-              <div className="hero-actions">
-                <button className="primary" onClick={() => setView("screening")}>
-                  Start Screening
-                </button>
-                <button className="ghost" onClick={() => setView("symptoms")}>
-                  Symptoms Guide
-                </button>
-                <button className="ghost" onClick={() => setView("diet")}>
-                  Diet Protocol
-                </button>
-              </div>
-            </div>
-            <div className="hero-side glass">
-              <p className="label">Current Session</p>
-              <p className="value">{selectedSymptoms} Indicators Selected</p>
-              <p className={`mini-risk tone-${riskTone(result?.risk_level)}`}>Latest Risk: {result?.risk_level || "Pending"}</p>
-              <p className="meta">{result ? `Score ${result.risk_score} - ${riskMessage}` : "Run screening to generate patient-specific risk insights."}</p>
-            </div>
-          </div>
         </header>
 
-        <section className="quick-stats">
-          <article className="glass stat-card">
-            <p className="label">Screening Inputs</p>
-            <p className="value">{selectedSymptoms}</p>
-            <p className="meta">Selected indicators from clinical checklist</p>
+        <section className="hero-section">
+          <article className="hero-panel">
+            <p className="hero-kicker">Infectious Disease Decision Workspace</p>
+            <h1>Typhoid Fever Decision Support Dashboard</h1>
+            <p>
+              Structured diagnosis support using rule-based reasoning, CSV-trained ML classification, and explainable
+              trace output for clinical transparency.
+            </p>
+            <div className="hero-cta">
+              <button className="primary" onClick={() => setView("screening")}>
+                Start Clinical Screening
+              </button>
+              <button className="ghost" onClick={() => setView("symptoms")}>
+                View Symptom Guidelines
+              </button>
+            </div>
           </article>
-          <article className="glass stat-card">
-            <p className="label">Knowledge Mode</p>
-            <p className="value">Hybrid Rules</p>
-            <p className="meta">IF-THEN rules + guideline indicators + traces</p>
+          <article className="session-panel">
+            <p className="mini-label">Current Session</p>
+            <p className="session-value">{selectedSymptoms}</p>
+            <p className="session-caption">Indicators currently selected</p>
+            <div className={`risk-badge tone-${riskTone(result?.risk_level)}`}>Latest Risk: {result?.risk_level || "Pending"}</div>
+            <p className="session-meta">
+              {result ? `Rule score ${result.risk_score}. ${riskMessage}` : "Run screening to generate explainable result."}
+            </p>
           </article>
-          <article className="glass stat-card">
-            <p className="label">Latest Risk</p>
-            <p className={`value tone-${riskTone(result?.risk_level)}`}>{result?.risk_level || "Pending"}</p>
-            <p className="meta">{result ? `Score: ${result.risk_score}` : "Run diagnostic to generate risk"}</p>
+        </section>
+
+        <section className="kpi-grid">
+          <article className="kpi-card">
+            <p className="mini-label">Inputs</p>
+            <p className="kpi-value">{selectedSymptoms}</p>
+            <p className="kpi-meta">Selected symptom indicators</p>
+          </article>
+          <article className="kpi-card">
+            <p className="mini-label">ML Probability</p>
+            <p className="kpi-value">{result?.ml_probability ?? "N/A"}</p>
+            <p className="kpi-meta">Probability from CSV-trained model</p>
+          </article>
+          <article className="kpi-card">
+            <p className="mini-label">Hybrid Score</p>
+            <p className="kpi-value">{result?.hybrid_score ?? "N/A"}</p>
+            <p className="kpi-meta">Rule + ML blended confidence</p>
+          </article>
+          <article className="kpi-card">
+            <p className="mini-label">Model Status</p>
+            <p className="kpi-value status">{result?.model_status ?? "Not loaded"}</p>
+            <p className="kpi-meta">Runtime model availability</p>
           </article>
         </section>
 
         {view === "screening" && (
-          <section className="glass panel">
-            <div className="panel-head">
-              <button className="back-link" onClick={() => setView("home")}>
-                ← Exit to Home
-              </button>
-              <h2>Typhoid Prediction Interface</h2>
-            </div>
-            <p className="dim section-note">
-              Use the checklist below. The system will output explainable rule matches and confidence score.
-            </p>
-            <form onSubmit={handleSubmit}>
-              <div className="grid">
-                {Object.keys(form).map((key) => (
-                  <label key={key} className="check">
-                    <input type="checkbox" checked={form[key]} onChange={() => toggle(key)} />
-                    <span>{displayLabel(key)}</span>
-                  </label>
-                ))}
-              </div>
-              <button className="primary full" type="submit" disabled={loading}>
-                {loading ? "Running Diagnostic..." : "Run Diagnostic"}
-              </button>
-            </form>
-            {error && <p className="error">{error}</p>}
+          <section className="workspace">
+            <article className="workspace-main">
+              <h2>Typhoid Screening Interface</h2>
+              <p className="dim section-note">
+                Complete the symptom checklist and run an explainable diagnosis.
+              </p>
+              <form onSubmit={handleSubmit}>
+                <div className="grid">
+                  {Object.keys(form).map((key) => (
+                    <label key={key} className="check">
+                      <input type="checkbox" checked={form[key]} onChange={() => toggle(key)} />
+                      <span>{displayLabel(key)}</span>
+                    </label>
+                  ))}
+                </div>
+                <button className="primary full" type="submit" disabled={loading}>
+                  {loading ? "Running Diagnostic..." : "Run Diagnostic"}
+                </button>
+              </form>
+              {error && <p className="error">{error}</p>}
+            </article>
+            <aside className="workspace-side">
+              <h3>Clinical Assist Notes</h3>
+              <ul>
+                <li>Use confirmed lab indicators where available.</li>
+                <li>Positive culture has high diagnostic importance.</li>
+                <li>Combine model output with physician judgement.</li>
+              </ul>
+            </aside>
           </section>
         )}
 
         {view === "symptoms" && (
-          <section className="glass panel">
-            <div className="panel-head">
-              <button className="back-link" onClick={() => setView("home")}>
-                ← Back to Home
-              </button>
+          <section className="workspace">
+            <article className="workspace-main">
               <h2>Typhoid Symptoms & Medical Advice</h2>
-            </div>
-            <div className="info-card">
-              <h3>Detailed Typhoid Symptoms</h3>
-              <ul>
-                {symptomGuide.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="info-card warning">
-              <h3>When Should You Visit a Doctor?</h3>
+              <div className="info-card">
+                <h3>Detailed Typhoid Symptoms</h3>
+                <ul>
+                  {symptomGuide.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+            <aside className="workspace-side warning">
+              <h3>When to Seek Care</h3>
               <p>
-                Seek medical care immediately if high fever persists, severe abdominal pain appears, dehydration
-                develops, or blood culture/Widal status is positive. Avoid self-medication without physician guidance.
+                Seek urgent medical evaluation if persistent fever, severe abdominal pain, or dehydration appears. Do
+                not delay testing where typhoid exposure risk is high.
               </p>
-            </div>
+            </aside>
           </section>
         )}
 
         {view === "diet" && (
-          <section className="glass panel">
-            <div className="panel-head">
-              <button className="back-link" onClick={() => setView("home")}>
-                ← Back to Home
-              </button>
-              <h2>Typhoid Diet Guide</h2>
-            </div>
-            <div className="info-card">
-              <h3>Nutrition Strategy During Recovery</h3>
-              <ul>
-                {dietGuide.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
+          <section className="workspace">
+            <article className="workspace-main">
+              <h2>Typhoid Recovery Diet Protocol</h2>
+              <div className="info-card">
+                <h3>Nutrition Strategy</h3>
+                <ul>
+                  {dietGuide.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+            <aside className="workspace-side">
+              <h3>Hydration Reminder</h3>
+              <p>
+                Hydration and safe food handling are essential during treatment and recovery. Avoid raw contaminated
+                food and use clean water.
+              </p>
+            </aside>
           </section>
         )}
 
         {result && (
-          <section className="glass panel">
-            <h2>Explainable Diagnostic Output</h2>
-            <div className={`risk-chip tone-${riskTone(result.risk_level)}`}>
-              Risk: <strong>{result.risk_level}</strong> | Score: <strong>{result.risk_score}</strong>
+          <section className="result-panel">
+            <div className="result-head">
+              <h2>Explainable Diagnostic Output</h2>
+              <div className={`risk-chip tone-${riskTone(result.risk_level)}`}>
+                Risk: <strong>{result.risk_level}</strong> | Rule Score: <strong>{result.risk_score}</strong>
+              </div>
             </div>
-            <div className="model-metrics">
-              <article className="metric-card">
-                <p className="metric-label">Rule Score</p>
-                <p className="metric-value">{result.risk_score}</p>
-              </article>
-              <article className="metric-card">
-                <p className="metric-label">ML Probability</p>
-                <p className="metric-value">{result.ml_probability ?? "N/A"}</p>
-              </article>
-              <article className="metric-card">
-                <p className="metric-label">Hybrid Score</p>
-                <p className="metric-value">{result.hybrid_score ?? "N/A"}</p>
-              </article>
-              <article className="metric-card">
-                <p className="metric-label">Model Status</p>
-                <p className="metric-value status">{result.model_status ?? "Not loaded"}</p>
-              </article>
-            </div>
-            <div className="output-grid output-grid-main">
-              <article className="info-card info-tall">
+            <div className="result-grid">
+              <article className="info-card">
                 <h3>Why This Result</h3>
                 <ul>
                   {result.explanation.map((item) => (
@@ -264,7 +256,7 @@ export default function App() {
                   ))}
                 </ul>
               </article>
-              <article className="info-card info-tall">
+              <article className="info-card">
                 <h3>Recommendations</h3>
                 <ul>
                   {result.recommendation.map((item) => (
@@ -272,8 +264,6 @@ export default function App() {
                   ))}
                 </ul>
               </article>
-            </div>
-            <div className="output-grid output-grid-secondary">
               <article className="info-card rules-card">
                 <h3>Rule Trace</h3>
                 <div className="rules-list">
@@ -281,14 +271,14 @@ export default function App() {
                     <div className="rule-row" key={rule.rule_id}>
                       <span className={rule.matched ? "pill match" : "pill miss"}>
                         {rule.rule_id} {rule.matched ? "Matched" : "Not Matched"}
-                      </span>{" "}
+                      </span>
                       <span className="rule-contribution">contribution={rule.contribution}</span>
                       <p className="rule-desc">{rule.description}</p>
                     </div>
                   ))}
                 </div>
               </article>
-              <article className="info-card info-tall">
+              <article className="info-card">
                 <h3>WHO Guideline Snippets</h3>
                 <ul>
                   {(result.guideline_snippets || []).map((item, idx) => (
@@ -300,7 +290,7 @@ export default function App() {
           </section>
         )}
 
-        <section className="glass panel">
+        <section className="dataset-panel">
           <h2>Real-Time Dataset Monitor (Hugging Face)</h2>
           {!dataset && <p className="dim">No dataset response available yet.</p>}
           {dataset && (
@@ -322,8 +312,8 @@ export default function App() {
         </section>
 
         <footer className="app-footer">
-          <span>Explainable Hybrid KBS for Typhoid Fever</span>
-          <span>Academic Decision Support Prototype</span>
+          <span>Typhoid Clinical Intelligence Platform</span>
+          <span>Designed for Explainable Medical Decision Support</span>
         </footer>
       </section>
     </main>
