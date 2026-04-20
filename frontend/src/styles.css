@@ -1,13 +1,12 @@
 :root {
-  --bg: #060b0a;
-  --bg-soft: #0b1411;
-  --line: #183328;
-  --text: #e7f3ec;
-  --muted: #9db8ac;
-  --accent: #47f37f;
-  --accent-soft: #2dc466;
-  --warn: #ff6e6e;
-  --amber: #ffd166;
+  --bg: #f4f8ff;
+  --line: #dce7f6;
+  --text: #11243b;
+  --muted: #58708d;
+  --accent: #257cff;
+  --accent-soft: #1eb980;
+  --warn: #e15555;
+  --amber: #d39b14;
 }
 
 * {
@@ -19,9 +18,9 @@ body {
   color: var(--text);
   font-family: "Inter", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at 15% 10%, rgba(71, 243, 127, 0.08), transparent 32%),
-    radial-gradient(circle at 90% 20%, rgba(71, 243, 127, 0.07), transparent 24%),
-    linear-gradient(180deg, #040807, #070d0a 38%, #070b09);
+    radial-gradient(circle at 10% 12%, rgba(37, 124, 255, 0.1), transparent 32%),
+    radial-gradient(circle at 80% 20%, rgba(30, 185, 128, 0.1), transparent 24%),
+    linear-gradient(180deg, #eef5ff, #f8fbff 38%, #eef4ff);
   min-height: 100vh;
 }
 
@@ -46,21 +45,21 @@ body {
 .app-shell::before {
   left: -14vw;
   top: -12vw;
-  background: rgba(56, 207, 118, 0.1);
+  background: rgba(37, 124, 255, 0.12);
 }
 
 .app-shell::after {
   right: -18vw;
   bottom: -16vw;
-  background: rgba(19, 106, 61, 0.15);
+  background: rgba(30, 185, 128, 0.12);
 }
 
 .noise-layer {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.12;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.9) 0.35px, transparent 0.35px);
+  opacity: 0.08;
+  background-image: radial-gradient(rgba(17, 36, 59, 0.5) 0.35px, transparent 0.35px);
   background-size: 3px 3px;
 }
 
@@ -73,12 +72,12 @@ body {
 }
 
 .glass {
-  background: linear-gradient(165deg, rgba(13, 19, 16, 0.92), rgba(10, 15, 12, 0.8));
-  border: 1px solid rgba(84, 141, 108, 0.25);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.94), rgba(249, 252, 255, 0.88));
+  border: 1px solid rgba(145, 170, 205, 0.35);
   box-shadow:
-    0 0 0 1px rgba(62, 98, 77, 0.18) inset,
-    0 14px 34px rgba(0, 0, 0, 0.34),
-    0 0 34px rgba(52, 173, 101, 0.08);
+    0 0 0 1px rgba(188, 206, 231, 0.32) inset,
+    0 14px 34px rgba(82, 109, 143, 0.16),
+    0 0 34px rgba(37, 124, 255, 0.05);
   border-radius: 20px;
 }
 
@@ -94,7 +93,7 @@ body {
   position: absolute;
   width: 200px;
   height: 200px;
-  background: radial-gradient(circle, rgba(71, 243, 127, 0.2), transparent 70%);
+  background: radial-gradient(circle, rgba(37, 124, 255, 0.2), transparent 70%);
   right: 10%;
   top: -30px;
   pointer-events: none;
@@ -102,7 +101,7 @@ body {
 
 .hero-badge {
   display: inline-block;
-  border: 1px solid rgba(71, 243, 127, 0.5);
+  border: 1px solid rgba(37, 124, 255, 0.45);
   color: var(--accent);
   padding: 8px 14px;
   border-radius: 999px;
@@ -137,7 +136,7 @@ body {
 
 .hero h1 span {
   color: var(--accent);
-  text-shadow: 0 0 20px rgba(71, 243, 127, 0.3);
+  text-shadow: 0 0 20px rgba(37, 124, 255, 0.2);
 }
 
 .hero p {
@@ -176,7 +175,7 @@ body {
 
 .hero-side .meta {
   margin: 0;
-  color: #b3cabf;
+  color: #5e7794;
   line-height: 1.5;
 }
 
@@ -200,13 +199,13 @@ body {
   padding: 16px;
   transition: transform 0.25s ease, border-color 0.25s ease;
   background:
-    linear-gradient(165deg, rgba(13, 19, 16, 0.92), rgba(10, 15, 12, 0.8)),
-    radial-gradient(circle at 100% 0, rgba(71, 243, 127, 0.08), transparent 45%);
+    linear-gradient(165deg, rgba(255, 255, 255, 0.95), rgba(249, 252, 255, 0.9)),
+    radial-gradient(circle at 100% 0, rgba(37, 124, 255, 0.08), transparent 45%);
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(91, 174, 123, 0.6);
+  border-color: rgba(37, 124, 255, 0.45);
 }
 
 .stat-card .label {
@@ -225,7 +224,7 @@ body {
 
 .stat-card .meta {
   margin: 0;
-  color: #a7c4b6;
+  color: #6a84a0;
   font-size: 0.86rem;
 }
 
@@ -233,7 +232,7 @@ button {
   cursor: pointer;
   border-radius: 999px;
   border: 1px solid transparent;
-  color: var(--text);
+  color: #14314f;
   font-weight: 700;
   transition: all 0.2s ease;
 }
@@ -243,10 +242,10 @@ button:hover {
 }
 
 .primary {
-  background: linear-gradient(180deg, #58ff8f, #34cc68);
-  color: #04230f;
-  border-color: rgba(115, 255, 157, 0.8);
-  box-shadow: 0 8px 22px rgba(52, 204, 104, 0.3);
+  background: linear-gradient(180deg, #4b95ff, #257cff);
+  color: #ffffff;
+  border-color: rgba(37, 124, 255, 0.7);
+  box-shadow: 0 8px 22px rgba(37, 124, 255, 0.25);
   padding: 12px 22px;
 }
 
@@ -256,8 +255,9 @@ button:hover {
 
 .ghost {
   padding: 11px 19px;
-  border-color: rgba(71, 243, 127, 0.55);
-  background: rgba(11, 22, 17, 0.75);
+  border-color: rgba(37, 124, 255, 0.45);
+  background: rgba(255, 255, 255, 0.8);
+  color: #1c3f67;
 }
 
 .panel {
@@ -308,15 +308,15 @@ button:hover {
   padding: 11px 13px;
   border-radius: 10px;
   border: 1px solid var(--line);
-  background: rgba(11, 18, 15, 0.92);
-  color: #cce6d8;
+  background: rgba(255, 255, 255, 0.95);
+  color: #27425f;
   text-transform: capitalize;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .check:hover {
-  border-color: rgba(92, 163, 124, 0.7);
-  background: rgba(13, 23, 18, 0.97);
+  border-color: rgba(37, 124, 255, 0.5);
+  background: rgba(248, 252, 255, 0.98);
 }
 
 .check input {
@@ -329,7 +329,7 @@ button:hover {
 }
 
 .error {
-  color: #ff9898;
+  color: #d94b4b;
 }
 
 .risk-chip {
@@ -337,24 +337,24 @@ button:hover {
   display: inline-block;
   padding: 9px 12px;
   border-radius: 10px;
-  border: 1px solid rgba(71, 243, 127, 0.45);
-  background: rgba(16, 32, 24, 0.8);
+  border: 1px solid rgba(37, 124, 255, 0.35);
+  background: rgba(243, 248, 255, 0.95);
   font-size: 0.95rem;
 }
 
 .tone-danger {
-  color: #ff9d9d;
-  border-color: rgba(255, 109, 109, 0.6);
+  color: #b93838;
+  border-color: rgba(225, 85, 85, 0.45);
 }
 
 .tone-warn {
-  color: #ffe6a4;
-  border-color: rgba(255, 209, 102, 0.6);
+  color: #9a6d00;
+  border-color: rgba(211, 155, 20, 0.45);
 }
 
 .tone-safe {
-  color: #8bffc2;
-  border-color: rgba(84, 250, 153, 0.6);
+  color: #1e8f67;
+  border-color: rgba(30, 185, 128, 0.45);
 }
 
 .output-grid {
@@ -374,9 +374,9 @@ button:hover {
 .info-card {
   border-radius: 14px;
   padding: 16px;
-  background: rgba(9, 15, 12, 0.88);
-  border: 1px solid rgba(56, 96, 73, 0.55);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(170, 193, 222, 0.55);
+  box-shadow: 0 10px 24px rgba(103, 127, 158, 0.14);
 }
 
 .info-tall {
@@ -400,7 +400,7 @@ button:hover {
 .info-card li {
   margin: 0 0 8px;
   line-height: 1.5;
-  color: #c4ddcf;
+  color: #355271;
 }
 
 .pill {
@@ -413,15 +413,15 @@ button:hover {
 }
 
 .pill.match {
-  color: #8bffc2;
-  border-color: rgba(84, 250, 153, 0.6);
-  background: rgba(13, 35, 24, 0.8);
+  color: #1f8d68;
+  border-color: rgba(30, 185, 128, 0.5);
+  background: rgba(239, 251, 246, 0.95);
 }
 
 .pill.miss {
-  color: #d2e0da;
-  border-color: rgba(120, 142, 132, 0.5);
-  background: rgba(20, 26, 23, 0.8);
+  color: #5f7388;
+  border-color: rgba(137, 157, 176, 0.45);
+  background: rgba(244, 248, 252, 0.95);
 }
 
 .rules-card {
@@ -437,21 +437,21 @@ button:hover {
 }
 
 .rule-row {
-  border: 1px solid rgba(64, 95, 78, 0.6);
+  border: 1px solid rgba(161, 184, 214, 0.7);
   border-radius: 10px;
   padding: 10px 11px;
-  background: rgba(13, 20, 16, 0.75);
+  background: rgba(250, 253, 255, 0.92);
 }
 
 .rule-contribution {
-  color: #afcabb;
+  color: #66809a;
   font-size: 0.85rem;
 }
 
 .rule-desc {
   margin: 6px 0 0;
   font-size: 0.84rem;
-  color: #95b4a6;
+  color: #59738f;
   line-height: 1.35;
 }
 
@@ -466,7 +466,7 @@ button:hover {
 }
 
 .dataset-row {
-  background: rgba(9, 16, 13, 0.86);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 12px 13px;
@@ -485,8 +485,8 @@ button:hover {
 .tag {
   margin-left: 8px;
   font-size: 0.8rem;
-  color: #072313;
-  background: #49ee82;
+  color: #ffffff;
+  background: #1eb980;
   border-radius: 999px;
   padding: 3px 9px;
 }
@@ -526,9 +526,9 @@ button:hover {
 @keyframes badgePulse {
   0%,
   100% {
-    box-shadow: 0 0 0 rgba(71, 243, 127, 0);
+    box-shadow: 0 0 0 rgba(37, 124, 255, 0);
   }
   50% {
-    box-shadow: 0 0 20px rgba(71, 243, 127, 0.18);
+    box-shadow: 0 0 20px rgba(37, 124, 255, 0.15);
   }
 }
