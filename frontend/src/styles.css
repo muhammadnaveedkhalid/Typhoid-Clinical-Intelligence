@@ -71,6 +71,44 @@ body {
   z-index: 1;
 }
 
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+}
+
+.brand-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.nav-btn {
+  border: 1px solid rgba(37, 124, 255, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 8px 12px;
+  font-size: 0.84rem;
+}
+
+.nav-btn.active {
+  background: rgba(37, 124, 255, 0.1);
+  border-color: rgba(37, 124, 255, 0.48);
+}
+
 .glass {
   background: linear-gradient(165deg, rgba(255, 255, 255, 0.94), rgba(249, 252, 255, 0.88));
   border: 1px solid rgba(145, 170, 205, 0.35);
@@ -342,6 +380,38 @@ button:hover {
   font-size: 0.95rem;
 }
 
+.model-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.metric-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(170, 193, 222, 0.55);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.metric-label {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-value {
+  margin: 5px 0 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.metric-value.status {
+  font-size: 0.9rem;
+}
+
 .tone-danger {
   color: #b93838;
   border-color: rgba(225, 85, 85, 0.45);
@@ -491,7 +561,24 @@ button:hover {
   padding: 3px 9px;
 }
 
+.app-footer {
+  margin-top: 16px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.84rem;
+}
+
 @media (max-width: 700px) {
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .model-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
   .hero-main {
     grid-template-columns: 1fr;
   }
@@ -509,6 +596,9 @@ button:hover {
   }
   .dataset-row {
     grid-template-columns: 1fr;
+  }
+  .app-footer {
+    flex-direction: column;
   }
 }
 

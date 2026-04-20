@@ -89,6 +89,24 @@ export default function App() {
     <main className="app-shell">
       <div className="noise-layer" />
       <section className="container">
+        <nav className="top-nav glass">
+          <div className="brand">
+            <p className="brand-title">Typhoid Clinical Intelligence</p>
+            <p className="brand-subtitle">Explainable Hybrid Decision Support</p>
+          </div>
+          <div className="nav-actions">
+            <button className={view === "screening" ? "nav-btn active" : "nav-btn"} onClick={() => setView("screening")}>
+              Screening
+            </button>
+            <button className={view === "symptoms" ? "nav-btn active" : "nav-btn"} onClick={() => setView("symptoms")}>
+              Symptoms
+            </button>
+            <button className={view === "diet" ? "nav-btn active" : "nav-btn"} onClick={() => setView("diet")}>
+              Diet
+            </button>
+          </div>
+        </nav>
+
         <header className="hero glass premium-hero">
           <div className="hero-topline">Infectious Disease Decision Support</div>
           <div className="hero-main">
@@ -219,6 +237,24 @@ export default function App() {
             <div className={`risk-chip tone-${riskTone(result.risk_level)}`}>
               Risk: <strong>{result.risk_level}</strong> | Score: <strong>{result.risk_score}</strong>
             </div>
+            <div className="model-metrics">
+              <article className="metric-card">
+                <p className="metric-label">Rule Score</p>
+                <p className="metric-value">{result.risk_score}</p>
+              </article>
+              <article className="metric-card">
+                <p className="metric-label">ML Probability</p>
+                <p className="metric-value">{result.ml_probability ?? "N/A"}</p>
+              </article>
+              <article className="metric-card">
+                <p className="metric-label">Hybrid Score</p>
+                <p className="metric-value">{result.hybrid_score ?? "N/A"}</p>
+              </article>
+              <article className="metric-card">
+                <p className="metric-label">Model Status</p>
+                <p className="metric-value status">{result.model_status ?? "Not loaded"}</p>
+              </article>
+            </div>
             <div className="output-grid output-grid-main">
               <article className="info-card info-tall">
                 <h3>Why This Result</h3>
@@ -284,6 +320,11 @@ export default function App() {
             </>
           )}
         </section>
+
+        <footer className="app-footer">
+          <span>Explainable Hybrid KBS for Typhoid Fever</span>
+          <span>Academic Decision Support Prototype</span>
+        </footer>
       </section>
     </main>
   );
